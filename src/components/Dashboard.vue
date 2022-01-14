@@ -1,25 +1,28 @@
 <template>
 <div id="dashboard">
-  <div class="container">
-    <div class="row">
+  <div class="container pt-4">
+    <div class="row pb-2">
       <div class="col-md-6 offset-md-3 col-12">
+        <h2>Choose coin pair</h2>
         <ul class="list-group dashboard-pair-select-menu">
-          <li class="list-group-item list-group-item-action" :class="{active:selectedCoin==='BTC'}">
-            <button @click="switchPair('BTC')" class="btn btn-success">btc/usd</button></li>
-          <li class="list-group-item list-group-item-action" :class="{active:selectedCoin==='ETH'}">
-            <button @click="switchPair('ETH')" class="btn btn-primary">eth/btc</button></li>
+          <li class="list-group-item list-group-item-action" :class="{active:selectedCoin==='BTC'}" @click="switchPair('BTC')">
+            btc/usd</li>
+          <li class="list-group-item list-group-item-action" :class="{active:selectedCoin==='ETH'}" @click="switchPair('ETH')">
+            eth/btc</li>
         </ul>
       </div>
     </div>
-    <!-- TradingView Widget BEGIN -->
-    <div class="tradingview-widget-container">
-      <div id="tradingview_004f2"></div>
-      <div class="tradingview-widget-copyright"><a href="https://ru.tradingview.com/symbols/BTCUSD/?exchange=BINANCEUS" rel="noopener" target="_blank"><span class="blue-text">График BTCUSD</span></a> от TradingView</div>
-
+    <div class="row">
+      <div class="col-12">
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+          <div id="tradingview_004f2"></div>
+          <div class="tradingview-widget-copyright"><a :href="'https://ru.tradingview.com/symbols/'+selectedCoin+'USD/?exchange=BINANCEUS'" rel="noopener" target="_blank"><span class="blue-text">График {{selectedCoin}}USD</span></a> от TradingView</div>
+        </div>
+        <!-- TradingView Widget END -->
+      </div>
     </div>
-    <!-- TradingView Widget END -->
   </div>
-
 </div>
 </template>
 
@@ -29,34 +32,38 @@ export default {
   data(){
     return{
       selectedCoin:'BTC',
-      tvWidget: null
+      tvWidget: null,
+      tvWidgetOptions:{
+        "width": 890,
+        "height": 610,
+        "interval": "1H",
+        "timezone": "Etc/UTC",
+        "theme": "light",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": false,
+        "allow_symbol_change": false,
+        "container_id": "tradingview_004f2"
+      }
     }
   },
   mounted() {
     this.$data.tvWidget = new TradingView.widget(
-        {
-          "width": 890,
-          "height": 610,
-          "symbol": "BINANCEUS:BTCUSD",
-          "interval": "1H",
-          "timezone": "Etc/UTC",
-          "theme": "light",
-          "style": "1",
-          "locale": "en",
-          "toolbar_bg": "#f1f3f6",
-          "enable_publishing": false,
-          "allow_symbol_change": true,
-          "container_id": "tradingview_004f2"
-        }
-    );
+        {...this.$data.tvWidgetOptions,"symbol":"BINANCEUS:BTCUSD"}
+    )
   },
   methods:{
     switchPair(coin){
       if (!coin || this.$data.tvWidget === null)
         return
 
+      //Couldn't set symbol so just reload widget
+      // https://github.com/serdimoa/charting/blob/master/Widget-Methods.md#setsymbolsymbol-interval-callback
       this.$data.selectedCoin = coin
-      this.$data.tvWidget.options.symbol =  `BINANCEUS:${coin}USD`
+      this.$data.tvWidget = new TradingView.widget(
+          {...this.$data.tvWidgetOptions,"symbol":`BINANCEUS:${coin}USD`}
+      )
     }
   }
 }
