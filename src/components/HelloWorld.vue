@@ -29,6 +29,13 @@
       <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+      <div id="tradingview_004f2"></div>
+      <div class="tradingview-widget-copyright"><a href="https://ru.tradingview.com/symbols/BTCUSD/?exchange=BINANCEUS" rel="noopener" target="_blank"><span class="blue-text">График BTCUSD</span></a> от TradingView</div>
+
+    </div>
+    <!-- TradingView Widget END -->
   </div>
 </template>
 
@@ -37,6 +44,24 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  mounted() {
+    new TradingView.widget(
+        {
+          "width": 980,
+          "height": 610,
+          "symbol": "BINANCEUS:BTCUSD",
+          "interval": "D",
+          "timezone": "Etc/UTC",
+          "theme": "dark",
+          "style": "1",
+          "locale": "ru",
+          "toolbar_bg": "#f1f3f6",
+          "enable_publishing": false,
+          "allow_symbol_change": true,
+          "container_id": "tradingview_004f2"
+        }
+    );
   }
 }
 </script>
