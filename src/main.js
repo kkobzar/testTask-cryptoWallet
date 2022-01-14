@@ -3,7 +3,8 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-require('./assets/tv')
+require('./assets/tv') // Trading View lib
+require('./assets/bootstrap.bundle.min') //Bootstrap lib
 
 Vue.config.productionTip = false
 

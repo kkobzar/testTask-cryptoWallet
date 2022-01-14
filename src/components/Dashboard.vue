@@ -12,10 +12,10 @@
         </ul>
       </div>
     </div>
-    <div class="row">
+    <div class="row" id="chart-container" >
       <div class="col-12">
         <!-- TradingView Widget BEGIN -->
-        <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container" ref="chart-container">
           <div id="tradingview_004f2"></div>
           <div class="tradingview-widget-copyright"><a :href="'https://ru.tradingview.com/symbols/'+selectedCoin+'USD/?exchange=BINANCEUS'" rel="noopener" target="_blank"><span class="blue-text">График {{selectedCoin}}USD</span></a> от TradingView</div>
         </div>
@@ -34,7 +34,6 @@ export default {
       selectedCoin:'BTC',
       tvWidget: null,
       tvWidgetOptions:{
-        "width": 890,
         "height": 610,
         "interval": "1H",
         "timezone": "Etc/UTC",
@@ -49,8 +48,11 @@ export default {
     }
   },
   mounted() {
+    //fix container margin calculation after mounted() execution
+    //container width minus 1%
+    let wdth = this.$refs["chart-container"].clientWidth - (this.$refs["chart-container"].clientWidth/100)
     this.$data.tvWidget = new TradingView.widget(
-        {...this.$data.tvWidgetOptions,"symbol":"BINANCEUS:BTCUSD"}
+        {...this.$data.tvWidgetOptions,"symbol":"BINANCEUS:BTCUSD","width":wdth }
     )
   },
   methods:{
@@ -62,7 +64,7 @@ export default {
       // https://github.com/serdimoa/charting/blob/master/Widget-Methods.md#setsymbolsymbol-interval-callback
       this.$data.selectedCoin = coin
       this.$data.tvWidget = new TradingView.widget(
-          {...this.$data.tvWidgetOptions,"symbol":`BINANCEUS:${coin}USD`}
+          {...this.$data.tvWidgetOptions,"symbol":`BINANCEUS:${coin}USD`,"width":this.$refs["chart-container"].clientWidth}
       )
     }
   }
@@ -70,5 +72,10 @@ export default {
 </script>
 
 <style scoped>
-
+#tradingview_004f2{
+  max-width: 100%;
+}
+.dashboard-pair-select-menu{
+  text-transform: uppercase;
+}
 </style>
