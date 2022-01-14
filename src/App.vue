@@ -9,10 +9,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <router-link :active-class="'active'" class="nav-link" to="/">Dashboard</router-link>
+              <router-link :active-class="'active'" class="nav-link" to="/dashboard">Dashboard</router-link>
             </li>
             <li class="nav-item">
-              <router-link :active-class="'active'" class="nav-link" to="/about">Wallets</router-link>
+              <router-link :active-class="'active'" class="nav-link" to="/wallet">Wallets</router-link>
             </li>
           </ul>
         </div>

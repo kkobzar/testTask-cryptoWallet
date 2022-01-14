@@ -2,14 +2,24 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 //import Home from '../views/Home.vue'
 import Dashboard from "@/components/Dashboard";
+import Wallet from "@/components/Wallet";
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    redirect:'/dashboard'
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
     component: Dashboard
+  },
+  {
+    path: '/wallet',
+    name: 'Wallet',
+    component: Wallet
   },
   {
     path: '/about',
@@ -22,7 +32,8 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes
+  routes,
+  mode:'history'
 })
 
 export default router
