@@ -1,32 +1,34 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Crypto Wallet</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <router-link :active-class="'active'" class="nav-link" to="/">Dashboard</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :active-class="'active'" class="nav-link" to="/about">Wallets</router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<!--    <div id="nav">
+      <router-link to="/">Dashboard</router-link> |
+      <router-link to="/about">Wallets</router-link>
+    </div>-->
     <router-view/>
   </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+/*
+Bootstrap v5 import
+*/
+@import "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css";
 </style>
