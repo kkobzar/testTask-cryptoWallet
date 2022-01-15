@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+<!--    TODO: navigation in component-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Crypto Wallet</a>
@@ -18,10 +19,6 @@
         </div>
       </div>
     </nav>
-<!--    <div id="nav">
-      <router-link to="/">Dashboard</router-link> |
-      <router-link to="/about">Wallets</router-link>
-    </div>-->
     <router-view/>
   </div>
 </template>
