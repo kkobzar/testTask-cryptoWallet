@@ -3,22 +3,22 @@
   <div class="container py-4">
     <div class="row">
 <!--      Wallets list-->
-      <div class="col-md-4 col-12">
+<!--      <div class="col-md-4 col-12">
         <ul class="list-group wallets-list">
-          <li v-for="coin in avaliableCoins" @click="selectCoin(coin)" class="list-group-item" :class="{active:selectedCoin === coin}">
+          <li v-for="coin in availableCoins" @click="selectCoin(coin)" class="list-group-item" :class="{active:selectedCoin === coin}">
             {{ coin }}</li>
         </ul>
-      </div>
+      </div>-->
 
 <!--      Wallet content-->
-      <div class="col-md-8 col-12">
-        <div class="card">
+      <div class="col-12">
+        <div v-for="coin in availableCoins" class="card mb-2">
           <div class="card-header">
-            {{selectedCoin}} Wallet
+            {{coin}} Wallet
           </div>
           <div class="card-body">
             <h5 class="card-title">Your balance</h5>
-            <p class="card-text"></p>
+            <p class="card-text">{{wallets[coin]}} {{coin}}</p>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@ export default {
         ETH:1.2,
         USDT:1600
       },
-      avaliableCoins:['BTC','ETH','USDT'],
+      availableCoins:['BTC','ETH','USDT'],
       selectedCoin:'BTC',
       connection:null
     }
